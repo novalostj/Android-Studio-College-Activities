@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Activity 5</string>
+
+    <string-array name="titleList">
+        <item>title0</item>
+        <item>title1</item>
+        <item>title2</item>
+        <item>title3</item>
+        <item>title4</item>
+    </string-array>
+
+    <string-array name="descriptionList">
+        <item>description0</item>
+        <item>description1</item>
+        <item>description2</item>
+        <item>description3</item>
+        <item>description4</item>
+    </string-array>
+
+    <integer-array name="imageIdList">
+        <item>@drawable/agflag</item>
+        <item>@drawable/afflag</item>
+        <item>@drawable/alflag</item>
+        <item>@drawable/agflag</item>
+        <item>@drawable/afflag</item>
+    </integer-array>
+
+</resources>
