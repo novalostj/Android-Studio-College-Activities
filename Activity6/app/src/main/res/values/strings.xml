@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Activity 6</string>
+
+    <string-array name="ChampionNames">
+        <item>"Alistar"</item>
+        <item>"Amumu"</item>
+        <item>"Gragas"</item>
+        <item>"Leona"</item>
+        <item>"Malphite"</item>
+        <item>"Maokai"</item>
+        <item>"Nautilus"</item>
+        <item>"Nunu"</item>
+        <item>"Ornn"</item>
+        <item>"Rammus"</item>
+        <item>"Rell"</item>
+        <item>"Sejuani"</item>
+        <item>"Sion"</item>
+        <item>"Zac"</item>
+    </string-array>
+
+    <integer-array name="ChampionResImage">
+        <item>@drawable/alistar</item>
+        <item>@drawable/amumu</item>
+        <item>@drawable/gragas</item>
+        <item>@drawable/leona</item>
+        <item>@drawable/malphite</item>
+        <item>@drawable/maokai</item>
+        <item>@drawable/nautilus</item>
+        <item>@drawable/nunu</item>
+        <item>@drawable/ornn</item>
+        <item>@drawable/rammus</item>
+        <item>@drawable/rell</item>
+        <item>@drawable/sejuani</item>
+        <item>@drawable/sion</item>
+        <item>@drawable/zac</item>
+    </integer-array>
+</resources>
