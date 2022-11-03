@@ -17,6 +17,7 @@ import android.widget.ListView;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
 
         save.setOnClickListener(view -> {
-            String value = pName.getText().toString() + " P" + pPrice.getText().toString();
+
+            String value = pName.getText().toString().toUpperCase(Locale.ROOT) + " P" + pPrice.getText().toString();
 
             itemList.add(value);
             Collections.sort(itemList);
@@ -71,8 +73,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        clickEvent();
+
+    }
+
+    public void refresh(){
+        finish();
+        startActivity(getIntent());
+    }
+
+    public void clickEvent(){
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
             alert.setTitle("Delete");
             alert.setMessage("Do you want to remove this item from the list?");
             alert.setCancelable(false);
@@ -82,23 +95,15 @@ public class MainActivity extends AppCompatActivity {
             });
 
             alert.setPositiveButton("Yes", (dialogInterface, i12) -> {
-                itemList.remove(i);
+                itemList.remove(arrayAdapter.getItem(i));
                 FileHelper.writeData(itemList, getApplicationContext());
                 refresh();
                 arrayAdapter.notifyDataSetChanged();
             });
 
-
             AlertDialog alertDialog = alert.create();
             alertDialog.show();
         });
-
     }
 
-    public void refresh(){
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(getIntent());
-        overridePendingTransition(0, 0);
-    }
 }
