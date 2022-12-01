@@ -2,7 +2,9 @@ package com.example.activity10;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -21,23 +23,34 @@ public class editProduct extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_product);
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_edit_product);
+            t_id = findViewById(R.id.t_id);
 
-        t_id = findViewById(R.id.t_id);
-
-        in_editName = findViewById(R.id.in_editName);
+            in_editName = findViewById(R.id.in_editName);
         in_editPrice = findViewById(R.id.in_editPrice);
 
         t_id.setText(getIntent().getStringExtra("id"));
         in_editName.setText(getIntent().getStringExtra("name"));
         in_editPrice.setText(getIntent().getStringExtra("price"));
 
-        findViewById(R.id.b_delete).setOnClickListener(view -> deleteRecord(t_id.getText().toString()));
+        findViewById(R.id.b_delete).setOnClickListener(view -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Confirm").setMessage("Continue Delete?")
+                    .setPositiveButton("Yes", (dialogInterface, i) -> deleteRecord(t_id.getText().toString()))
+                    .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel())
+                    .show();
+        });
         findViewById(R.id.b_edit).setOnClickListener(view -> editRecord(t_id.getText().toString(), in_editName.getText().toString(), in_editPrice.getText().toString()));
     }
 
     private void editRecord(String id, String name, String price){
+
+        if (name.length() == 0 || price.length() == 0){
+            toast("Missing field!!");
+            return;
+        }
+
         try {
             SQLiteDatabase db = openOrCreateDatabase("products", Context.MODE_PRIVATE, null);
 
@@ -50,7 +63,7 @@ public class editProduct extends AppCompatActivity {
 
             toast("Successfully Edited!");
             finish();
-            Intent bIntent = new Intent(getApplicationContext(), displayProducts.class);
+            Intent bIntent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(bIntent);
         }
         catch(Exception e){
@@ -70,9 +83,8 @@ public class editProduct extends AppCompatActivity {
 
             toast("Successfully removed!");
             finish();
-            Intent bIntent = new Intent(getApplicationContext(), displayProducts.class);
+            Intent bIntent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(bIntent);
-
         }
         catch(Exception e){
             toast("Failed to remove");

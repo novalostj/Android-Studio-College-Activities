@@ -47,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
     private void launchNewActivity(int i){
         Intent intent = new Intent(getApplicationContext(), displayProducts.class);
         intent.putExtra("dbName", getDatabaseName(i));
-
+        toast(getDatabaseName(i));
         startActivity(intent);
     }
 
     private void addRecord(String name, String price){
 
-        if (currentDBInt < 1) {
-            toast("Failed to add to DATABASE");
+        if (currentDBInt < 1 || name.length() == 0 || price.length() == 0) {
+            toast("Missing Field!");
             return;
         }
 
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             inputName.setText("");
             inputPrice.setText("");
             inputName.requestFocus();
+            currentDBInt = 0;
 
             r_food.setChecked(false);
             r_drink.setChecked(false);

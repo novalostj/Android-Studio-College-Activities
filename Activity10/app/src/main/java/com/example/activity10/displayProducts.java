@@ -55,9 +55,11 @@ public class displayProducts extends AppCompatActivity {
             product prod = products.get(i);
 
             Intent intent = new Intent(getApplicationContext(), editProduct.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("id", prod.id);
             intent.putExtra("name", prod.name);
             intent.putExtra("price", prod.price);
+            finish();
             startActivity(intent);
         });
     }
